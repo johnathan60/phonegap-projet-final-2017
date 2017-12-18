@@ -16,10 +16,9 @@
 </head>
 
 <body>
-    <div id="container" style="width: 75%;">
+    <div id="container" style="width: 90%;">
         <canvas id="canvas"></canvas>
     </div>
-    <button id="randomizeData">Randomize Data</button>
     <script>
         var VICTORY = ["Victoire", "Défaites"];
         var color = Chart.helpers.color;
@@ -31,7 +30,7 @@
                 borderColor: window.chartColors.blue,
                 borderWidth: 1,
                 data: [
-                    randomScalingFactor()
+                    50
                 ]
             },	{
     			label: 'Défaite',
@@ -39,7 +38,7 @@
                 borderColor: window.chartColors.red,
                 borderWidth: 1,
                 data: [
-                    randomScalingFactor()
+                    90
                 ]
             }]
 
@@ -57,23 +56,18 @@
                     },
                     title: {
                         display: true,
-                        text: 'Chart.js Bar Chart'
-                    }
-                }
+                        text: 'Statistiques du jeu'
+                    },
+                    yAxis : [{
+                        ticks: {
+                            min: 0,
+                            max: 100,
+                            stepSize: 20
+                        }
+                    }]
+                },
             });
-
         };
-
-        document.getElementById('randomizeData').addEventListener('click', function() {
-            var zero = Math.random() < 0.2 ? true : false;
-            barChartData.datasets.forEach(function(dataset) {
-                dataset.data = dataset.data.map(function() {
-                    return zero ? 0.0 : randomScalingFactor();
-                });
-
-            });
-            window.myBar.update();
-        });
 
         var colorNames = Object.keys(window.chartColors);
         document.getElementById('addDataset').addEventListener('click', function() {
