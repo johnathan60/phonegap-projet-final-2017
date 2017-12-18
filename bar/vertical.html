@@ -29,17 +29,13 @@
                 backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
                 borderColor: window.chartColors.blue,
                 borderWidth: 1,
-                data: [
-                    50
-                ]
+                data: [20]
             },	{
     			label: 'Défaite',
                 backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
                 borderColor: window.chartColors.red,
                 borderWidth: 1,
-                data: [
-                    90
-                ]
+                data: [90]
             }]
 
         };
@@ -56,38 +52,21 @@
                     },
                     title: {
                         display: true,
-                        text: 'Statistiques du jeu'
+                        text: 'Statistiques du jeu',
                     },
-                    yAxis : [{
-                        ticks: {
-                            min: 0,
-                            max: 100,
-                            stepSize: 20
-                        }
-                    }]
-                },
+                    scales: {
+                        yAxes : [{
+                            ticks: {
+                                min: 0,
+                                max: 100,
+                                stepSize: 20,
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
             });
         };
-
-        var colorNames = Object.keys(window.chartColors);
-        document.getElementById('addDataset').addEventListener('click', function() {
-            var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
-            var dsColor = window.chartColors[colorName];
-            var newDataset = {
-                label: 'Dataset ' + barChartData.datasets.length,
-                backgroundColor: color(dsColor).alpha(0.5).rgbString(),
-                borderColor: dsColor,
-                borderWidth: 1,
-                data: []
-            };
-
-            for (var index = 0; index < barChartData.labels.length; ++index) {
-                newDataset.data.push(randomScalingFactor());
-            }
-
-            barChartData.datasets.push(newDataset);
-            window.myBar.update();
-        });
     </script>
 </body>
 
